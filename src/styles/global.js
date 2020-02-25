@@ -1,6 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
+import 'rc-color-picker/assets/index.css';
 
 export default createGlobalStyle`
+
 * {
       margin: 0;
       padding: 0;
