@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 import Box from '~/components/Box';
+import Menu from '~/components/Menu';
 import MenuColorPicker from '~/components/MenuColorPicker';
 import MenuSlider from '~/components/MenuSlider';
 
-import { Container } from './styles';
+import { Container, BoxContainer } from './styles';
 
 export default function BoxShadow() {
 	const [style, setStyle] = useState([]);
@@ -23,23 +24,35 @@ export default function BoxShadow() {
 
 	return (
 		<Container>
-			<Box css={style} />
-			<div>
+			<BoxContainer>
+				<Box css={style} />
+			</BoxContainer>
+			<Menu>
 				<MenuSlider label="Horizontal" defaultValue={x} setValue={setX} />
 				<MenuSlider label="Vertical" defaultValue={y} setValue={setY} />
-				<MenuSlider label="Blur" defaultValue={blur} setValue={setBlur} />
-				<MenuSlider label="Spread" defaultValue={spread} setValue={setSpread} />
+				<MenuSlider
+					label="Blur"
+					defaultValue={blur}
+					setValue={setBlur}
+					min={0}
+				/>
+				<MenuSlider
+					label="Spread"
+					defaultValue={spread}
+					setValue={setSpread}
+					min={-125}
+				/>
 				<MenuColorPicker
-					label="Color"
+					label="Pick a color"
 					defaultValue={color}
 					setValue={setColor}
 				/>
-				<div>
+				<code>
 					{style.map(s => (
 						<p>{s}</p>
 					))}
-				</div>
-			</div>
+				</code>
+			</Menu>
 		</Container>
 	);
 }
