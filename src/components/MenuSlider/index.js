@@ -5,18 +5,32 @@ import PropTypes from 'prop-types';
 
 import { Container } from './styles';
 
-export default function MenuSlider({ label, defaultValue, setValue }) {
+export default function MenuSlider({
+	label,
+	defaultValue,
+	setValue,
+	min,
+	max,
+}) {
 	return (
 		<Container>
 			<div>
 				<strong>{label}</strong>
-				<input value={defaultValue} onChange={e => setValue(e.target.value)} />
+				<input
+					value={defaultValue}
+					type="number"
+					onChange={e => setValue(e.target.value)}
+				/>
 			</div>
-			<Slider
-				valueLabelDisplay="auto"
-				defaultValue={defaultValue}
-				onChange={(event, value) => setValue(value)}
-			/>
+			<span>
+				<Slider
+					valueLabelDisplay="auto"
+					defaultValue={defaultValue}
+					min={min}
+					max={max}
+					onChange={(event, value) => setValue(value)}
+				/>
+			</span>
 		</Container>
 	);
 }
@@ -24,5 +38,11 @@ export default function MenuSlider({ label, defaultValue, setValue }) {
 MenuSlider.propTypes = {
 	label: PropTypes.string.isRequired,
 	defaultValue: PropTypes.number.isRequired,
+	min: PropTypes.number,
+	max: PropTypes.number,
 	setValue: PropTypes.func.isRequired,
+};
+MenuSlider.defaultProps = {
+	min: -250,
+	max: 250,
 };
